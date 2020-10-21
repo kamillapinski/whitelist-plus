@@ -1,0 +1,15 @@
+name: WhitelistPlus
+version: 0.0.1
+main: com.kamillapinski.whitelistplus.WhitelistPlusPlugin
+api-version: 1.16
+load: STARTUP
+
+commands:
+  whp-reload:
+    description: Reloads the whitelist
+    usage: /whp-reload
+    permission: whitelistplus.reload
+  whp-kick:
+    description: Kick all non-whitelisted players
+    usage: /whp-kick
+    permission: whitelistplus.kick
