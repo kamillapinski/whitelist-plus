@@ -24,6 +24,6 @@ jobs:
       run: mvn -B package --file pom.xml
     - name: Download JAR
       uses: actions/download-artifact@v2
-        with:
-          name: whitelistplus.jar
-          path: target/whitelistplus-1.0-SNAPSHOT.jar
+      with:
+        name: whitelistplus.jar
+        path: target/whitelistplus-1.0-SNAPSHOT.jar
