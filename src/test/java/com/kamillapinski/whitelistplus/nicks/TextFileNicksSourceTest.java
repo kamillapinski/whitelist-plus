@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Stream;
@@ -58,7 +56,7 @@ public class TextFileNicksSourceTest {
 		Set<String> nicks = textFileNicksSource.fetchNicks().get();
 
 		assertEquals(
-			new HashSet<>(Arrays.asList("A", "B", "C")),
+			Set.of("A", "B", "C"),
 			nicks
 		);
 	}

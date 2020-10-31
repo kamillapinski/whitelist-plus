@@ -3,6 +3,7 @@ package com.kamillapinski.whitelistplus.access;
 import org.bukkit.entity.Player;
 
 import java.util.Collection;
+import java.util.Objects;
 
 import static java.util.Objects.requireNonNull;
 
@@ -15,6 +16,8 @@ public class CollectionPlayerWhitelistedChecker implements PlayerWhitelistedChec
 
 	@Override
 	public boolean isWhitelisted(Player player) {
+		Objects.requireNonNull(player);
+
 		return nicks.contains(player.getName());
 	}
 

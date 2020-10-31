@@ -9,6 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.MemoryConfiguration;
 import org.bukkit.entity.Player;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -40,18 +41,22 @@ public class KickCommandExecutor implements CommandExecutor {
 	) {
 		List<Player> playersToKick = getPlayersToKick();
 
-		if (playersToKick.size() > 0) {
-			playersToKick.forEach(player -> {
-				player.kickPlayer(ConfigurationEntry.NOT_WHITELISTED_MESSAGE.getString(configuration));
-				logger.info("Kicked player " + player.getDisplayName());
-			});
-
-			sender.sendMessage("Kicked " + playersToKick.size() + " players");
-		} else {
+		if (playersToKick.isEmpty()) {
 			logger.info("No one kicked");
 			sender.sendMessage("No one kicked");
+		} else {
+			kickPlayers(sender, playersToKick);
 		}
 		return true;
+	}
+
+	private void kickPlayers(CommandSender sender, Collection<Player> playersToKick) {
+		for (Player player : playersToKick) {
+			player.kickPlayer(ConfigurationEntry.NOT_WHITELISTED_MESSAGE.getString(configuration));
+			logger.info("Kicked player " + player.getDisplayName());
+		}
+
+		sender.sendMessage("Kicked " + playersToKick.size() + " players");
 	}
 
 	private List<Player> getPlayersToKick() {

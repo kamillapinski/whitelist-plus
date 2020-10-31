@@ -3,6 +3,7 @@ package com.kamillapinski.whitelistplus.fs;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 /**
@@ -22,11 +23,15 @@ public class StandardFilesystem implements Filesystem {
 
 	@Override
 	public Stream<String> lines(Path path) throws IOException {
+		Objects.requireNonNull(path);
+
 		return Files.lines(path);
 	}
 
 	@Override
 	public void createFileIfNotExists(Path path) throws IOException {
+		Objects.requireNonNull(path);
+
 		if (Files.notExists(path)) {
 			Files.createFile(path);
 		}

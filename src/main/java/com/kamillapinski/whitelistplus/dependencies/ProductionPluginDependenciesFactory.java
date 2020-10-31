@@ -39,7 +39,7 @@ public class ProductionPluginDependenciesFactory implements PluginDependenciesFa
 
 	@Override
 	public ReloadableWhitelistManager reloadableWhitelistManager() {
-		Path whitelistPath = Paths.get(ConfigurationEntry.WHITELIST_FILE_PATH.getString(config()));
+		Path whitelistPath = ConfigurationEntry.WHITELIST_FILE_PATH.getPath(config());
 		logger().info("Whitelist path: " + whitelistPath);
 
 		TextFileNicksSource nicksSource = new TextFileNicksSource(filesystem(), whitelistPath);

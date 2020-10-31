@@ -34,12 +34,15 @@ public class TextFileNicksSource implements NicksSource {
 
 	private Set<String> loadNicks() {
 		try (Stream<String> linesStream = filesystem.lines(filePath)) {
-			return linesStream.map(String::trim)
-			                  .filter(line -> !line.trim().isEmpty())
-			                  .collect(Collectors.toSet());
+			return linesToNicksStream(linesStream).collect(Collectors.toSet());
 		} catch (IOException ex) {
 			throw new UncheckedIOException(ex);
 		}
+	}
+
+	private Stream<String> linesToNicksStream(Stream<String> linesStream) {
+		return linesStream.map(String::trim)
+		                  .filter(line -> !line.trim().isEmpty());
 	}
 
 	@Override
