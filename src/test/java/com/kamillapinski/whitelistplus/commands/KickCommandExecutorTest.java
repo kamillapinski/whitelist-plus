@@ -1,8 +1,12 @@
 package com.kamillapinski.whitelistplus.commands;
 
 import com.kamillapinski.whitelistplus.access.PlayerWhitelistedChecker;
+import com.kamillapinski.whitelistplus.config.ConfigurationEntry;
 import org.bukkit.Server;
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.defaults.BukkitCommand;
+import org.bukkit.command.defaults.PluginsCommand;
 import org.bukkit.configuration.MemoryConfiguration;
 import org.bukkit.entity.Player;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,6 +29,7 @@ class KickCommandExecutorTest {
 	private final Server server;
 	private final PlayerWhitelistedChecker playerWhitelistedChecker = player -> ALLOWED_NICKS.contains(player.getName());
 	private final KickCommandExecutor kickCommandExecutor;
+	private final MemoryConfiguration configuration = mock(MemoryConfiguration.class);
 
 	private final Collection<Player> onlinePlayers = new ArrayList<>();
 
@@ -34,7 +39,7 @@ class KickCommandExecutorTest {
 
 		kickCommandExecutor = new KickCommandExecutor(
 			server,
-			mock(MemoryConfiguration.class),
+			configuration,
 			playerWhitelistedChecker,
 			mock(Logger.class)
 		);
@@ -53,7 +58,9 @@ class KickCommandExecutorTest {
 			createPlayer("321")
 		));
 
-		kickCommandExecutor.onCommand(commandSender, null, null, null);
+		when(configuration.getString(ConfigurationEntry.NOT_WHITELISTED_MESSAGE.getConfigKey())).thenReturn("XD");
+
+		kickCommandExecutor.onCommand(commandSender, new PluginsCommand(""), "", null);
 	}
 
 	@Test
@@ -74,10 +81,10 @@ class KickCommandExecutorTest {
 		doAnswer(invocation -> {
 			onlinePlayers.removeIf(p -> p.getName().equals(nick));
 			return null;
-		}).when(result).kickPlayer(any());
+		}).when(result).kick(any());
 
 		when(result.getName()).thenReturn(nick);
-		when(result.getDisplayName()).thenReturn(nick);
+		when(result.getName()).thenReturn(nick);
 
 		return result;
 	}

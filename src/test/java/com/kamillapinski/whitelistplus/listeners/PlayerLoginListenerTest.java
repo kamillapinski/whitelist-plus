@@ -1,9 +1,11 @@
 package com.kamillapinski.whitelistplus.listeners;
 
 import com.kamillapinski.whitelistplus.access.PlayerWhitelistedChecker;
+import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.util.Collection;
 import java.util.Set;
@@ -47,7 +49,7 @@ class PlayerLoginListenerTest {
 
 			   playerLoginListener.onPlayerLogin(event);
 
-			   verify(event).disallow(eq(PlayerLoginEvent.Result.KICK_WHITELIST), eq("NOT_WHITELISTED"));
+			   verify(event).disallow(eq(PlayerLoginEvent.Result.KICK_WHITELIST), eq(Component.text("NOT_WHITELISTED")));
 		   });
 	}
 
@@ -58,7 +60,7 @@ class PlayerLoginListenerTest {
 
 			playerLoginListener.onPlayerLogin(event);
 
-			verify(event, never()).disallow(any(), any());
+			verify(event, never()).disallow(any(), Mockito.<Component>any());
 		});
 	}
 }

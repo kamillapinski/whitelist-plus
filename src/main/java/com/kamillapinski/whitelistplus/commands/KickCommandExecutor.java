@@ -2,6 +2,7 @@ package com.kamillapinski.whitelistplus.commands;
 
 import com.kamillapinski.whitelistplus.access.PlayerWhitelistedChecker;
 import com.kamillapinski.whitelistplus.config.ConfigurationEntry;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -52,8 +53,8 @@ public class KickCommandExecutor implements CommandExecutor {
 
 	private void kickPlayers(CommandSender sender, Collection<Player> playersToKick) {
 		for (Player player : playersToKick) {
-			player.kickPlayer(ConfigurationEntry.NOT_WHITELISTED_MESSAGE.getString(configuration));
-			logger.info("Kicked player " + player.getDisplayName());
+			player.kick(Component.text(ConfigurationEntry.NOT_WHITELISTED_MESSAGE.getString(configuration)));
+			logger.info("Kicked player " + player.getName());
 		}
 
 		sender.sendMessage("Kicked " + playersToKick.size() + " players");
