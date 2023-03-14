@@ -7,14 +7,16 @@ import com.kamillapinski.whitelistplus.dependencies.PluginDependenciesFactory;
 import com.kamillapinski.whitelistplus.listeners.PlayerLoginListener;
 import com.kamillapinski.whitelistplus.manager.ReloadableWhitelistManager;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 
+import static java.util.Objects.compare;
 import static java.util.Objects.requireNonNull;
 
-public class WhitelistPlusPlugin extends JavaPlugin {
+public class WhitelistPlusPlugin extends JavaPlugin implements Listener {
 	private final PluginDependenciesFactory pluginDependenciesFactory;
 
 	private ReloadableWhitelistManager reloadableWhitelistManager;

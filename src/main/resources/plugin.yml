@@ -1,8 +1,11 @@
 name: WhitelistPlus
-version: 0.0.1
+version: 1.0.0
 main: com.kamillapinski.whitelistplus.WhitelistPlusPlugin
-api-version: 1.16
+description: A simple whitelist plugin for Minecraft
+author: Kamil Łapiński
+api-version: 1.19
 load: STARTUP
+website: https://kampillapinski.com
 
 commands:
   whp-reload:
