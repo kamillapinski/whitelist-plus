@@ -27,4 +27,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: whitelistplus.jar
-        path: target/whitelistplus-1.0-SNAPSHOT.jar
+        path: target/whitelistplus*.jar
